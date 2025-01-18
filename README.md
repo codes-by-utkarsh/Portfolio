@@ -13,4 +13,4 @@ I am a passionate and driven Computer Science student specializing in Cyber Secu
 
 ## Portfolio Link
 
-🔗 [Explore My Portfolio](https://github.com/codes-by-utkarsh/Portfolio)
+🔗 [My Portfolio](https://codes-by-utkarsh.github.io/Portfolio/)
