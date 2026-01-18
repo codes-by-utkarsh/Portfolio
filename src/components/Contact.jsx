@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
+    const form = useRef();
+    const [status, setStatus] = useState(''); // 'sending', 'success', 'error'
+
     const [formData, setFormData] = useState({
         name: '',
-        email: '',
+        user_email: '',
         subject: '',
         message: ''
     });
@@ -15,10 +19,25 @@ const Contact = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const { name, subject, message } = formData;
-        // Construct mailto link
-        const mailtoLink = `mailto:usrivastava2011@gmail.com?subject=${encodeURIComponent(subject || `Portfolio Contact from ${name}`)}&body=${encodeURIComponent(`Name: ${name}\n\nMessage:\n${message}`)}`;
-        window.location.href = mailtoLink;
+        setStatus('sending');
+
+        // REPLACE THESE WITH YOUR ACTUAL EMAILJS SERVICE ID, TEMPLATE ID, AND PUBLIC KEY
+        // Sign up at https://www.emailjs.com/
+        const SERVICE_ID = 'service_zaovv88';
+        const TEMPLATE_ID = 'template_42cwm7q';
+        const PUBLIC_KEY = 'Pnz6mu-wJ6y-1WIlM';
+
+        emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form.current, PUBLIC_KEY)
+            .then((result) => {
+                console.log(result.text);
+                setStatus('success');
+                setFormData({ name: '', user_email: '', subject: '', message: '' }); // Clear form
+                setTimeout(() => setStatus(''), 5000);
+            }, (error) => {
+                console.log(error.text);
+                setStatus('error');
+                setTimeout(() => setStatus(''), 5000);
+            });
     };
 
     const handleCopyEmail = () => {
@@ -30,7 +49,7 @@ const Contact = () => {
     return (
         <section id="contact" className="section container">
             <h2 className="title">Get In Touch</h2>
-            <div className="grid-responsive" style={styles.grid}>
+            <div style={styles.grid}>
                 <div style={styles.info}>
                     <div style={styles.status}>
                         <span style={styles.statusDot}></span>
@@ -68,7 +87,8 @@ const Contact = () => {
                     </div> */}
                 </div>
 
-                <form style={styles.form} onSubmit={handleSubmit}>
+                <form style={styles.form} ref={form} onSubmit={handleSubmit}>
+                    <input type="hidden" name="time" value={new Date().toLocaleString()} />
                     <div style={styles.row}>
                         <div style={styles.inputGroup}>
                             <label style={styles.inputLabel}>Name</label>
@@ -86,8 +106,8 @@ const Contact = () => {
                             <label style={styles.inputLabel}>Email</label>
                             <input
                                 type="email"
-                                name="email"
-                                value={formData.email}
+                                name="user_email"
+                                value={formData.user_email}
                                 onChange={handleChange}
                                 style={styles.input}
                                 placeholder="john@example.com"
@@ -121,9 +141,16 @@ const Contact = () => {
                         ></textarea>
                     </div>
 
-                    <button className="btn btn-primary" style={styles.submitBtn}>
-                        Send Message
+                    <button className="btn btn-primary" style={styles.submitBtn} disabled={status === 'sending'}>
+                        {status === 'sending' ? 'Sending...' : 'Send Message'}
                     </button>
+
+                    {status === 'success' && (
+                        <p style={{ color: '#00ff41', marginTop: '1rem' }}>Message sent successfully!</p>
+                    )}
+                    {status === 'error' && (
+                        <p style={{ color: '#ff4444', marginTop: '1rem' }}>Failed to send message. Please try again.</p>
+                    )}
                 </form>
             </div>
         </section>

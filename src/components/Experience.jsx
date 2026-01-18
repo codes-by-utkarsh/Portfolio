@@ -1,5 +1,4 @@
 import React from 'react';
-import androidClubImg from '../assets/androidclub.png';
 
 const Experience = () => {
     const experiences = [
@@ -76,21 +75,6 @@ const Experience = () => {
                 'Participated in technical events and contributed to OWASP initiatives.'
             ],
             skills: ['OWASP', 'InfoSec']
-        },
-        {
-            role: 'Member',
-            company: 'Android Club VIT Bhopal',
-            type: 'Community',
-            duration: '2025',
-            location: 'Bhopal, India',
-            desc: [
-                'Active member contributing to Android development and security discussions.',
-                'Participated in club workshops and events.'
-            ],
-            skills: ['Android', 'Community'],
-            links: [
-                { label: 'Certificate', url: androidClubImg }
-            ]
         }
     ];
 

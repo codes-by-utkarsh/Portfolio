@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 const Header = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = React.useState(false);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
   const scrollToSection = (id) => {
+    setIsOpen(false);
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
-      setIsOpen(false);
     }
   };
 
@@ -21,13 +21,13 @@ const Header = () => {
         <div style={styles.logo}>Utkarsh Srivastava</div>
 
         <div className="hamburger" onClick={toggleMenu}>
-          <span className="bar"></span>
-          <span className="bar"></span>
-          <span className="bar"></span>
+          <span className={isOpen ? "bar active" : "bar"}></span>
+          <span className={isOpen ? "bar active" : "bar"}></span>
+          <span className={isOpen ? "bar active" : "bar"}></span>
         </div>
 
-        <nav>
-          <ul className={`nav-menu ${isOpen ? 'active' : ''}`} style={window.innerWidth > 768 ? styles.navList : {}}>
+        <nav className={`nav-menu ${isOpen ? 'active' : ''}`}>
+          <ul style={{ ...styles.navList, flexDirection: isOpen ? 'column' : 'row' }}>
             <li style={styles.navItem} onClick={() => scrollToSection('experience')}>Experience</li>
             <li style={styles.navItem} onClick={() => scrollToSection('skills')}>Skills</li>
             <li style={styles.navItem} onClick={() => scrollToSection('projects')}>Projects</li>
@@ -65,16 +65,21 @@ const styles = {
     fontWeight: '700',
     fontSize: '1.2rem',
     letterSpacing: '-0.05em',
+    zIndex: 1001,
   },
   navList: {
     display: 'flex',
     gap: '2rem',
+    alignItems: 'center',
   },
   navItem: {
     cursor: 'pointer',
     fontSize: '0.9rem',
     fontWeight: '500',
-    listStyle: 'none',
+    transition: 'color 0.3s ease',
+    ':hover': {
+      color: '#fff',
+    }
   }
 };
 

@@ -4,6 +4,7 @@ const Services = () => {
     const [showModal, setShowModal] = useState(false);
     const [step, setStep] = useState(1); // 1: Details, 2: Payment, 3: Success
     const [selectedPlan, setSelectedPlan] = useState(null);
+    const [paymentMethod, setPaymentMethod] = useState('card');
 
     const plans = [
         {
@@ -90,19 +91,76 @@ const Services = () => {
                             <div style={styles.modalContent}>
                                 <h3 style={styles.modalTitle}>Payment Gateway</h3>
                                 <p style={styles.modalSubtitle}>Secure Checkout - ${selectedPlan.price}.00</p>
+
                                 <div style={styles.paymentMethods}>
-                                    <div style={styles.methodActive}>Credit Card</div>
-                                    <div style={styles.method}>Crypto (ETH/BTC)</div>
-                                </div>
-                                <div style={styles.cardForm}>
-                                    <input type="text" placeholder="Card Number (Mock)" style={styles.input} />
-                                    <div style={{ display: 'flex', gap: '1rem' }}>
-                                        <input type="text" placeholder="MM/YY" style={styles.input} />
-                                        <input type="text" placeholder="CVC" style={styles.input} />
+                                    <div
+                                        style={paymentMethod === 'card' ? styles.methodActive : styles.method}
+                                        onClick={() => setPaymentMethod('card')}
+                                    >
+                                        International
+                                    </div>
+                                    <div
+                                        style={paymentMethod === 'upi' ? styles.methodActive : styles.method}
+                                        onClick={() => setPaymentMethod('upi')}
+                                    >
+                                        UPI (India)
+                                    </div>
+                                    <div
+                                        style={paymentMethod === 'crypto' ? styles.methodActive : styles.method}
+                                        onClick={() => setPaymentMethod('crypto')}
+                                    >
+                                        Crypto
                                     </div>
                                 </div>
+
+                                {paymentMethod === 'card' && (
+                                    <div style={styles.cardForm}>
+                                        <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '1.5rem', lineHeight: '1.5' }}>
+                                            For security, we handle international payments via PayPal. You can pay using any Credit/Debit Card or PayPal wallet.
+                                        </p>
+                                        <a
+                                            href={`https://paypal.me/usrivastava2011/${selectedPlan.price}`}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            style={styles.paypalBtn}
+                                        >
+                                            Pay ${selectedPlan.price} via PayPal
+                                        </a>
+                                        <p style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginTop: '1rem', textAlign: 'center' }}>
+                                            *Link opens in a new tab. After paying, click 'I have completed the payment' below.
+                                        </p>
+                                    </div>
+                                )}
+
+                                {paymentMethod === 'upi' && (
+                                    <div style={styles.cardForm}>
+                                        <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
+                                            <img
+                                                src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=usrivastava2011@okaxis&pn=Utkarsh%20Srivastava&am=${selectedPlan.price * 85}&cu=INR`}
+                                                alt="UPI QR Code"
+                                                style={{ border: '4px solid #fff', borderRadius: '8px' }}
+                                            />
+                                            <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginTop: '0.5rem' }}>
+                                                Scan to pay ₹{selectedPlan.price * 85}
+                                            </p>
+                                        </div>
+                                        <input type="text" placeholder="Enter VPA / UPI ID" style={styles.input} />
+                                    </div>
+                                )}
+
+                                {paymentMethod === 'crypto' && (
+                                    <div style={styles.cardForm}>
+                                        <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '1rem' }}>
+                                            Send exactly <strong>0.0__ BTC</strong> or <strong>0.0__ ETH</strong> to the addresses below.
+                                        </p>
+                                        <div style={styles.cryptoAddress}>
+                                            <span style={{ color: '#00ff41' }}>ETH:</span> 0x123...abc
+                                        </div>
+                                    </div>
+                                )}
+
                                 <button style={styles.modalBtn} onClick={() => setStep(3)}>
-                                    Pay ${selectedPlan.price}.00
+                                    I have completed the payment
                                 </button>
                             </div>
                         )}
@@ -291,6 +349,31 @@ const styles = {
     text: {
         color: 'var(--text-secondary)',
         lineHeight: '1.5',
+    },
+    cryptoAddress: {
+        padding: '1rem',
+        backgroundColor: '#000',
+        borderRadius: '6px',
+        border: '1px solid var(--border-color)',
+        fontFamily: 'var(--font-mono)',
+        fontSize: '0.85rem',
+        color: 'var(--text-secondary)',
+        wordBreak: 'break-all',
+    },
+    paypalBtn: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
+        padding: '1rem',
+        backgroundColor: '#0070ba',
+        color: '#fff',
+        fontWeight: 'bold',
+        borderRadius: '6px',
+        textDecoration: 'none',
+        fontSize: '1rem',
+        transition: 'background-color 0.2s',
+        marginBottom: '0.5rem',
     }
 };
 

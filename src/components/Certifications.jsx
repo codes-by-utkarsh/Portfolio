@@ -8,14 +8,6 @@ import blockchainImg from '../assets/blockchain.jpg';
 import bitsAndBytesImg from '../assets/bitsandbytes.jpg';
 import microsoftImg from '../assets/microstoft.jpg';
 import matlabImg from '../assets/matlab.jpg';
-import jrPenTesterPdf from '../assets/JrPenetrationTester - THM.pdf';
-import blockchainPdf from '../assets/Blockchain and its Applications.pdf';
-import bitsBytesPdf from '../assets/Bits & Bytes of Networking.pdf';
-import microsoftPdf from '../assets/CertificateOfCompletion_Introduction to Career Skills in Software Development.pdf';
-import matlabPdf from '../assets/MATLAB Onramp Certificate.pdf';
-import arcxPdf from '../assets/arcX.pdf';
-import awsWebinarImg from '../assets/External Attack Surface for Initial Access in AWS Cloud Webinar_page-0001.jpg';
-import thmNewPdf from '../assets/THM-3OV5GVPCNM.pdf';
 
 const CertificateCard = ({ cert }) => {
     const [isHovered, setIsHovered] = useState(false);
@@ -74,7 +66,14 @@ const Certifications = () => {
     const [scrollLeft, setScrollLeft] = useState(0);
 
     const certifications = [
-
+        {
+            title: "Jr. Penetration Tester",
+            issuer: "TryHackMe",
+            date: "May 2025",
+            image: jrPenTesterImg,
+            link: "https://tryhackme-certificates.s3-eu-west-1.amazonaws.com/THM-SBZOIULVBQ.png",
+            credentialID: "THM-SBZOIULVBQ"
+        },
         {
             title: "CNWPP (Certified Network & Website Pen Testing Professional)",
             issuer: "Udemy",
@@ -95,7 +94,7 @@ const Certifications = () => {
             issuer: "arcX",
             date: "Dec 2024",
             image: arcxImg,
-            link: arcxPdf,
+            link: "https://arcx.io/verify-certificate?id=8e880ba892d3088454521fd9da086604e0234e87&k=88fe4aaa86804484b16950378b75dd2c",
             credentialID: "8e880ba892d3088454521fd9da086604e0234e87"
         },
         {
@@ -111,7 +110,7 @@ const Certifications = () => {
             issuer: "NPTEL",
             date: "May 2025",
             image: blockchainImg,
-            link: blockchainPdf,
+            link: "https://internalapp.nptel.ac.in/noc/Ecertificate/?q=NPTEL25CS08S55480007904215915",
             credentialID: "NPTEL25CS08S55480007904215915"
         },
         {
@@ -119,7 +118,7 @@ const Certifications = () => {
             issuer: "Google",
             date: "Jan 2025",
             image: bitsAndBytesImg,
-            link: bitsBytesPdf,
+            link: "https://www.coursera.org/account/accomplishments/certificate/JF6WRY1SLGAI",
             credentialID: "JF6WRY1SLGAI"
         },
         {
@@ -127,7 +126,7 @@ const Certifications = () => {
             issuer: "Microsoft",
             date: "Jun 2024",
             image: microsoftImg,
-            link: microsoftPdf,
+            link: "https://www.linkedin.com/learning/certificates/6d32f0cf2fa973ef6036bd4444d4b6f83549fb7e520e5b4791c7be2892f126ac?trk=share_certificate",
             credentialID: "6d32f0cf2fa973ef6036bd4444d4b6f83549fb7e520e5b4791c7be2892f126ac"
         },
         {
@@ -135,7 +134,7 @@ const Certifications = () => {
             issuer: "MathWorks",
             date: "Aug 2023",
             image: matlabImg,
-            link: matlabPdf
+            link: "https://matlabacademy.mathworks.com/progress/share/certificate.html?id=74657160-93b4-47e1-9802-5b857b7090fc&"
         },
         {
             title: "Fundamentals In AI & ML",
@@ -143,21 +142,6 @@ const Certifications = () => {
             date: "2024",
             image: vityarthiImg,
             link: "#"
-        },
-        {
-            title: "External Attack Surface in AWS",
-            issuer: "Webinar",
-            date: "2025",
-            image: awsWebinarImg,
-            link: "#"
-        },
-        {
-            title: "Jr. Penetration Tester",
-            issuer: "TryHackMe",
-            date: "2025",
-            image: jrPenTesterImg, // Reuse image as placeholder
-            link: thmNewPdf,
-            credentialID: "THM-3OV5GVPCNM"
         }
     ];
 
