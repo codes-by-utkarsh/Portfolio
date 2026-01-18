@@ -55,7 +55,7 @@ const Skills = () => {
                 { name: "Kali Linux", slug: "kalilinux" },
                 { name: "Parrot OS", slug: "parrotsecurity" },
                 { name: "Zap Proxy", slug: "zaproxy" },
-                { name: "Ghidra", custom: "🐉" } // Keeping Ghidra custom for now if slug unsure, user only mentioned Zap
+                { name: "Ghidra", slug: "ghidra" }
             ]
         },
         {
@@ -64,8 +64,8 @@ const Skills = () => {
                 { name: "OWASP Top 10", slug: "owasp" },
                 { name: "API Security", slug: "postman" },
                 { name: "Mobile Security", slug: "android" },
-                { name: "Malware Analysis", custom: "🦠" },
-                { name: "Forensics", custom: "🔍" },
+                { name: "Malware Analysis", slug: "virustotal" },
+                { name: "Forensics", slug: "splunk" },
                 { name: "Network Security", slug: "cisco" }
             ]
         },
