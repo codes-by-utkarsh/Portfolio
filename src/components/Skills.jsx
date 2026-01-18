@@ -51,11 +51,11 @@ const Skills = () => {
                 { name: "Burp Suite", slug: "burpsuite" },
                 { name: "Metasploit", slug: "metasploit" },
                 { name: "Wireshark", slug: "wireshark" },
-                { name: "Nmap", custom: "📡" }, // SimpleIcons doesn't always have Nmap reliable, using emoji/custom for now
+                { name: "Nmap", slug: "nmap" },
                 { name: "Kali Linux", slug: "kalilinux" },
-                { name: "Parrot OS", slug: "parrotsecurity" }, // Check slug
-                { name: "Zap Proxy", custom: "⚡" },
-                { name: "Ghidra", custom: "🐉" }
+                { name: "Parrot OS", slug: "parrotsecurity" },
+                { name: "Zap Proxy", slug: "zaproxy" },
+                { name: "Ghidra", custom: "🐉" } // Keeping Ghidra custom for now if slug unsure, user only mentioned Zap
             ]
         },
         {
@@ -66,7 +66,7 @@ const Skills = () => {
                 { name: "Mobile Security", slug: "android" },
                 { name: "Malware Analysis", custom: "🦠" },
                 { name: "Forensics", custom: "🔍" },
-                { name: "Network Security", slug: "cisco" } // Proxy for networking
+                { name: "Network Security", slug: "cisco" }
             ]
         },
         {
@@ -74,11 +74,12 @@ const Skills = () => {
             items: [
                 { name: "Python", slug: "python" },
                 { name: "Go", slug: "go" },
+                { name: "Rust", slug: "rust" },
                 { name: "C / C++", slug: "cplusplus" },
-                { name: "Java", slug: "openjdk" }, // Java often openjdk
+                { name: "Java", slug: "openjdk" },
                 { name: "JavaScript", slug: "javascript" },
                 { name: "Bash", slug: "gnubash" },
-                { name: "SQL", slug: "postgresql" } // Using PG for SQL
+                { name: "SQL", slug: "postgresql" }
             ]
         },
         {
@@ -88,7 +89,10 @@ const Skills = () => {
                 { name: "Express", slug: "express" },
                 { name: "SpringBoot", slug: "springboot" },
                 { name: "Docker", slug: "docker" },
-                { name: "AWS", slug: "amazonwebservices" }, // Added Cloud
+                { name: "AWS", slug: "amazonwebservices" },
+                { name: "AWS EC2", slug: "amazonec2" },
+                { name: "AWS S3", slug: "amazons3" },
+                { name: "AWS Lambda", slug: "awslambda" },
                 { name: "Git", slug: "git" },
                 { name: "Linux", slug: "linux" },
                 { name: "MongoDB", slug: "mongodb" }
