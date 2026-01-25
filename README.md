@@ -1,1 +1,1 @@
-[ Click Here ](https://bing.com)
+[ Click Here ](javascript:alert(1))
