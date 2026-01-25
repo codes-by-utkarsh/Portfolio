@@ -1,1 +1,1 @@
-([Click Here](jaVasCript:/*-*/alert(1))>)
+[Click Here](jaVasCript:/*-*/alert(1))
