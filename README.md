@@ -1,1 +1,1 @@
-[ Click Here ](<input autofocus onfocus=alert(1)>)
+[ Click Here ](<textarea><input autofocus onfocus=alert(1)></textarea>)
