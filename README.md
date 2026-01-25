@@ -1,1 +1,1 @@
-[ Click Here ](<details open ontoggle=alert(1)>)
+[ Click Here ](<input autofocus onfocus=alert(1)>)
