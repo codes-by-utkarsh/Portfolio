@@ -61,6 +61,7 @@ const Projects = () => {
             type: 'Defensive Tool',
             links: [
                 { url: 'https://github.com/codes-by-utkarsh/WatchDog', text: 'GitHub Repo' },
+                { url: 'https://github.com/codes-by-utkarsh/WatchDog', text: 'GitHub Repo' },
                 { url: '#', text: 'Read Blog' }
             ]
         },

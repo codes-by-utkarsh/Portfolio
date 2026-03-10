@@ -1,245 +1,183 @@
-import React from 'react';
-import spiderImg from '../assets/Spider.png';
+import React, { useState } from 'react';
+
+const SkillCard = ({ name, iconSlug, customIcon }) => {
+    const [isHovered, setIsHovered] = useState(false);
+    const darkLogos = ['express', 'owasp', 'openjdk'];
+    const isDarkLogo = darkLogos.includes(iconSlug);
+
+    return (
+        <div
+            style={{
+                ...styles.skillCard,
+                borderColor: isHovered ? '#00ff41' : 'var(--border-color)',
+                transform: isHovered ? 'translateY(-5px)' : 'none',
+                boxShadow: isHovered ? '0 5px 15px rgba(0, 255, 65, 0.1)' : 'none',
+            }}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+        >
+            {iconSlug ? (
+                <img
+                    // Fetch default colored icon always
+                    src={`https://cdn.simpleicons.org/${iconSlug}`}
+                    alt={name}
+                    style={{
+                        ...styles.icon,
+                        // Custom filter for dark logos to make them visible (invert black to white)
+                        filter: isDarkLogo
+                            ? (isHovered ? 'invert(1)' : 'grayscale(100%) invert(0.7)')
+                            : (isHovered ? 'grayscale(0%)' : 'grayscale(100%) brightness(1.5)')
+                    }}
+                    title={name}
+                    onError={(e) => {
+                        // If the simpleicon fails to load, gracefully hide it completely
+                        e.target.style.display = 'none';
+                    }}
+                />
+            ) : null}
+            <span style={{
+                ...styles.skillName,
+                color: isHovered ? '#fff' : 'var(--text-secondary)'
+            }}>
+                {name}
+            </span>
+        </div>
+    );
+};
 
 const Skills = () => {
     const categories = [
         {
-            title: "FRONTEND & LANGUAGES",
-            number: "01",
-            items: ["C", "C++", "Python", "JS", "Qt", "HTML5", "CSS3", "React", "React Flow"],
-            colSpan: 2
+            title: "OFFENSIVE SECURITY",
+            items: [
+                { name: "Burp Suite", slug: "burpsuite" },
+                { name: "Metasploit", slug: "metasploit" },
+                { name: "Wireshark", slug: "wireshark" },
+                { name: "Nmap", slug: "" },
+                { name: "Kali Linux", slug: "kalilinux" },
+                { name: "Parrot OS", slug: "parrotsecurity" },
+                { name: "Zap Proxy", slug: "" },
+                { name: "Ghidra", slug: "ghidra" }
+            ]
         },
         {
-            title: "AI / ML",
-            number: "02",
-            items: ["TensorFlow", "PyTorch", "OpenCV", "FastAPI"],
-            colSpan: 1
+            title: "Vulnerable Analysis Tools",
+            items: [
+                { name: "OWASP Top 10", slug: "owasp" },
+                { name: "API Security", slug: "postman" },
+                { name: "Mobile Security", slug: "android" },
+                { name: "Malware Analysis", slug: "virustotal" },
+                { name: "Forensics", slug: "splunk" },
+                { name: "Network Security", slug: "cisco" }
+            ]
         },
         {
-            title: "BACKEND & DB",
-            number: "03",
-            items: ["Node.js", "Express", "MySQL", "MongoDB"],
-            colSpan: 1
+            title: "Programming Languages",
+            items: [
+                { name: "Python", slug: "python" },
+                { name: "Go", slug: "go" },
+                { name: "Rust", slug: "rust" },
+                { name: "C / C++", slug: "cplusplus" },
+                { name: "Java", slug: "openjdk" },
+                { name: "JavaScript", slug: "javascript" },
+                { name: "Bash", slug: "gnubash" },
+                { name: "SQL", slug: "postgresql" }
+            ]
         },
         {
-            title: "CYBERSECURITY",
-            number: "04",
-            items: ["Burp Suite", "Nmap", "Wireshark", "Ghidra"],
-            colSpan: 1
-        },
-        {
-            title: "DEVOPS",
-            number: "05",
-            items: ["Docker", "Git", "GitHub Actions", "CI/CD", "Vite", "NPM"],
-            colSpan: 1
-        },
-        {
-            title: "DEPLOYMENT",
-            number: "06",
-            items: ["Vercel", "Render", "GitHub", "Netlify"],
-            colSpan: 1
-        },
-        {
-            title: "UI/UX",
-            number: "07",
-            items: ["Figma", "Canva", "Photoshop", "Adobe Animate"],
-            colSpan: 1
+            title: "Backend & Cloud Security",
+            items: [
+                { name: "Node.js", slug: "nodedotjs" },
+                { name: "Express", slug: "express" },
+                { name: "SpringBoot", slug: "springboot" },
+                { name: "Docker", slug: "docker" },
+                { name: "AWS", slug: "amazonwebservices" },
+                { name: "AWS EC2", slug: "" },
+                { name: "AWS S3", slug: "" },
+                { name: "AWS Lambda", slug: "awslambda" },
+                { name: "Git", slug: "git" },
+                { name: "Linux", slug: "linux" },
+                { name: "MongoDB", slug: "mongodb" }
+            ]
         }
     ];
 
     return (
-        <section id="skills" style={styles.section}>
-            {/* Spider Logo Image */}
-            <img src={spiderImg} alt="Spider Logo Indicator" style={styles.spiderContainer} />
-
-            <div style={styles.container}>
-                <div style={styles.header}>
-                    <div style={styles.breadcrumb}>
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="#ffffff" style={{ marginRight: '14px' }}>
-                            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-                        </svg>
-                        <span style={styles.breadcrumbDot}></span> / TECH STACK
-                    </div>
-                    <h2 style={styles.mainTitle}>Skillset</h2>
-                </div>
-
-                <div className="cards-grid" style={styles.cardsGrid}>
-                    {categories.map((cat, idx) => (
-                        <div key={idx} style={{
-                            ...styles.card,
-                            gridColumn: `span ${cat.colSpan}`
-                        }} className="skill-card">
-                            {/* Giant faded background number */}
-                            <div style={styles.cardNumber}>{cat.number}</div>
-
-                            <h3 style={styles.cardTitle}>&lt; {cat.title} &gt;</h3>
-
-                            <div style={styles.skillsWrapper}>
-                                {cat.items.map((skill, sIdx) => (
-                                    <span key={sIdx} style={styles.skillPill} className="skill-pill">
-                                        {skill}
-                                    </span>
-                                ))}
-                            </div>
+        <section id="skills" className="section container">
+            <h2 className="title">Knowledge & Skills</h2>
+            <div style={styles.grid}>
+                {categories.map((category, idx) => (
+                    <div key={idx} style={styles.categoryColumn}>
+                        <h3 style={styles.categoryTitle}>{category.title}</h3>
+                        <div style={styles.skillsWrapper}>
+                            {category.items.map((skill, sIdx) => (
+                                <SkillCard
+                                    key={sIdx}
+                                    name={skill.name}
+                                    iconSlug={skill.slug}
+                                />
+                            ))}
                         </div>
-                    ))}
-                </div>
+                    </div>
+                ))}
             </div>
-
-            {/* Scoped CSS for hover and responsive effects */}
-            <style>
-                {`
-                .cards-grid {
-                    display: grid;
-                    grid-template-columns: repeat(3, 1fr);
-                    gap: 2rem;
-                }
-                .skill-card {
-                    transition: all 0.3s ease;
-                }
-                .skill-card:hover {
-                    border-color: rgba(59, 130, 246, 0.5) !important;
-                    box-shadow: 0 8px 30px rgba(59, 130, 246, 0.15) !important;
-                    transform: translateY(-4px);
-                }
-                .skill-pill {
-                    transition: all 0.2s ease;
-                }
-                .skill-pill:hover {
-                    background-color: rgba(59, 130, 246, 0.25) !important;
-                    border-color: rgba(59, 130, 246, 0.8) !important;
-                    color: #fff !important;
-                    transform: scale(1.05);
-                }
-                @media (max-width: 992px) {
-                    .cards-grid {
-                        grid-template-columns: repeat(2, 1fr);
-                    }
-                    .skill-card {
-                        grid-column: span 1 !important;
-                    }
-                }
-                @media (max-width: 650px) {
-                    .cards-grid {
-                        grid-template-columns: 1fr;
-                    }
-                }
-            `}
-            </style>
         </section>
     );
 };
 
 const styles = {
-    section: {
-        position: 'relative',
-        padding: '6rem 2rem',
-        minHeight: '100vh',
-        overflow: 'hidden',
-        fontFamily: "'Inter', sans-serif"
+    grid: {
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+        gap: '3rem',
     },
-    spiderContainer: {
-        position: 'absolute',
-        top: '55%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: '80%',
-        maxWidth: '700px',
-        opacity: 0.15, // Muted opacity for the image watermark
-        zIndex: 2,
-        pointerEvents: 'none',
-        objectFit: 'contain',
-        filter: 'drop-shadow(0 0 15px rgba(37, 99, 235, 0.4))'
-    },
-    container: {
-        position: 'relative',
-        zIndex: 3,
-        maxWidth: '1200px',
-        margin: '0 auto',
-    },
-    header: {
-        marginBottom: '4rem',
-    },
-    breadcrumb: {
-        display: 'flex',
-        alignItems: 'center',
-        fontSize: '0.85rem',
-        color: '#64748b',
-        letterSpacing: '0.2em',
-        marginBottom: '1rem',
-        fontWeight: '600'
-    },
-    breadcrumbDot: {
-        width: '6px',
-        height: '6px',
-        backgroundColor: '#3b82f6',
-        borderRadius: '50%',
-        boxShadow: '0 0 15px #3b82f6, 0 0 5px #3b82f6',
-        margin: '0 14px'
-    },
-    mainTitle: {
-        fontSize: '4.5rem',
-        fontWeight: '800',
-        color: '#ffffff',
-        fontStyle: 'italic',
-        margin: 0,
-        letterSpacing: '-0.03em',
-        textShadow: '0 4px 20px rgba(0,0,0,0.8)',
-    },
-    cardsGrid: {
-        /* handled in <style> block for media queries */
-    },
-    card: {
-        position: 'relative',
-        backgroundColor: 'rgba(15, 23, 42, 0.5)',
-        backdropFilter: 'blur(16px)',
-        border: '1px solid rgba(59, 130, 246, 0.2)',
-        borderRadius: '24px',
-        padding: '2.5rem',
-        overflow: 'hidden',
-        minHeight: '180px',
+    categoryColumn: {
         display: 'flex',
         flexDirection: 'column',
+        gap: '1.5rem',
     },
-    cardTitle: {
-        color: '#3b82f6',
-        fontSize: '0.95rem',
-        fontWeight: '700',
-        letterSpacing: '0.15em',
-        marginBottom: '2rem',
-        position: 'relative',
-        zIndex: 2,
-        fontFamily: "'JetBrains Mono', monospace"
-    },
-    cardNumber: {
-        position: 'absolute',
-        bottom: '-25px',
-        right: '15px',
-        fontSize: '10rem',
-        fontWeight: '900',
-        color: 'rgba(255, 255, 255, 0.03)',
-        lineHeight: 1,
-        pointerEvents: 'none',
-        zIndex: 0,
-        fontStyle: 'italic',
+    categoryTitle: {
+        fontSize: '1.1rem',
+        color: '#00ff41',
+        borderBottom: '1px solid #222',
+        paddingBottom: '0.5rem',
+        fontFamily: 'var(--font-mono)',
+        textTransform: 'uppercase',
+        letterSpacing: '0.05em',
     },
     skillsWrapper: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        gap: '0.9rem',
-        position: 'relative',
-        zIndex: 2,
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fill, minmax(120px, 1fr))', // Small cards
+        gap: '1rem',
     },
-    skillPill: {
-        backgroundColor: 'rgba(30, 41, 59, 0.7)',
-        border: '1px solid rgba(148, 163, 184, 0.15)',
-        color: '#cbd5e1',
-        padding: '0.6rem 1.4rem',
-        borderRadius: '50px',
-        fontSize: '0.95rem',
-        fontWeight: '500',
+    skillCard: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '1rem',
+        backgroundColor: 'var(--surface-color)',
+        borderRadius: '6px',
+        border: '1px solid var(--border-color)',
+        transition: 'all 0.2s ease',
+        gap: '0.75rem',
+        textAlign: 'center',
         cursor: 'default',
-        backdropFilter: 'blur(8px)',
+    },
+    icon: {
+        width: '32px',
+        height: '32px',
+        objectFit: 'contain',
+        transition: 'filter 0.2s',
+    },
+    emojiIcon: {
+        fontSize: '1.5rem',
+    },
+    skillName: {
+        fontSize: '0.85rem',
+        color: 'var(--text-secondary)',
+        fontWeight: '500',
+        transition: 'color 0.2s',
     }
 };
 
