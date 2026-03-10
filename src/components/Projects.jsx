@@ -61,8 +61,8 @@ const Projects = () => {
             type: 'Defensive Tool',
             links: [
                 { url: 'https://github.com/codes-by-utkarsh/WatchDog', text: 'GitHub Repo' },
-                { url: 'https://github.com/codes-by-utkarsh/WatchDog', text: 'GitHub Repo' },
-                { url: '#', text: 'Read Blog' }
+                { url: 'https://watchdog.0xutkarsh.tech/', text: 'Download Link' },
+                { url: 'https://medium.com/@drizzlehx/catch-me-if-you-can-building-an-offensive-anti-theft-system-for-windows-58e65fc4c672', text: 'Read Blog' }
             ]
         },
         {
@@ -71,8 +71,8 @@ const Projects = () => {
             description: 'Advanced Hoax Threat Detection & Analysis System. A sophisticated AI-powered system for detecting and analyzing potential bomb threats across multiple communication channels. Built with modern web technologies and designed for production deployment.',
             skills: ['Node.js', 'Express.js', 'LLMs', 'Tailwind', 'React.js'],
             type: 'AI Security',
-            link: '#',
-            linkText: 'Link'
+            link: 'http://truesight.0xutkarsh.tech/',
+            linkText: 'Website Link'
         },
         {
             title: 'VAAUL',
@@ -82,8 +82,8 @@ const Projects = () => {
             skills: ['Network Security', 'Web Security', 'Python', 'LLMs'],
             type: 'Automation Tool',
             links: [
-                { url: '#', text: 'Visit CLI Tool' },
-                { url: '#', text: 'Read Blog' }
+                { url: 'https://github.com/codes-by-utkarsh/VAAUL-Vulnerability-Assessment-Automation-Using-LLM', text: 'Visit CLI Tool' },
+                { url: 'https://medium.com/@drizzlehx/vaaul-vulnerability-assessment-automation-using-llms-d9c17070f529', text: 'Read Blog' }
             ]
         },
         {
@@ -92,7 +92,7 @@ const Projects = () => {
             description: 'A Python-based Social Media Broken Link Scanner that crawls a given website, extracts social media profile links, and verifies if they are valid to prevent takeover attacks.',
             skills: ['Python', 'Web Crawling', 'OSINT'],
             type: 'Scanner Tool',
-            link: '#',
+            link: 'https://github.com/codes-by-utkarsh/LinkHijackScanner',
             linkText: 'View Tool'
         },
         {
@@ -102,8 +102,7 @@ const Projects = () => {
             skills: ['Python', 'MySQL', 'Encryption', 'Cryptography'],
             type: 'Privacy Tool',
             links: [
-                { url: '#', text: 'View Project' },
-                { url: '#', text: 'Research Paper' }
+                { url: 'https://github.com/codes-by-utkarsh/SafeLock', text: 'View Project' }
             ]
         }
     ];
