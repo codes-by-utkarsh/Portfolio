@@ -89,30 +89,6 @@ const ProjectCard = ({ project }) => {
 const Projects = () => {
     const projects = [
         {
-            title: 'Security & Compliance Engineering',
-            subtitle: 'ConversAI Labs',
-            period: 'Feb 2026 - Present',
-            description: 'Worked on securing and preparing a production-grade AI platform for compliance (SOC2-oriented). Focused on backend/API security, vulnerability assessment, and infrastructure-level risk analysis.',
-            bullets: [
-                'Performed deep API security testing (white-box) across authentication, authorization, and input validation layers.',
-                'Identified and managed vulnerabilities including mass assignment, improper input validation (XSS), and authorization flaws.',
-                'Designed and executed a structured vulnerability assessment methodology aligned with real-world bug bounty workflows.',
-                'Assisted in security fixes: Input validation, secure schema enforcement, and API rate limiting.',
-                'Contributed to SOC2 readiness by evaluating open-source compliance tools and defining audit scope/controls.',
-                'Analyzed GCP cloud security posture, defining IAM role review strategy and external attack surface considerations.',
-                'Collaborated with the team to prioritize security fixes based on risk impact.'
-            ],
-            impact: [
-                'Improved API security posture by identifying critical vulnerabilities before production exposure.',
-                'Contributed to compliance readiness (SOC2) by aligning engineering efforts with security controls.',
-                'Established a repeatable security testing workflow for future assessments.'
-            ],
-            skills: ['Python', 'Postman', 'Burp Suite', 'Nmap', 'GCP', 'OWASP Top 10'],
-            type: 'Security Engineering',
-            link: 'https://conversailabs.com',
-            linkText: 'Organization Website'
-        },
-        {
             title: 'WatchDog',
             period: 'Jan 2026',
             description: 'A lightweight, hidden background service that captures photos of intruders attempting to access your Windows laptop with wrong passwords. Plus, a remote command center controlled via Telegram.',

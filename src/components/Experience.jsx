@@ -3,10 +3,31 @@ import React from 'react';
 const Experience = () => {
     const experiences = [
         {
+            role: 'Security & Compliance Engineering',
+            company: 'ConversAI Labs',
+            type: 'Contract/Freelance',
+            duration: 'Apr 2026 - Present',
+            location: 'Remote',
+            desc: [
+                'Worked on securing and preparing a production-grade AI platform for compliance (SOC2-oriented). Focused on backend/API security, vulnerability assessment, and infrastructure-level risk analysis.',
+                'Performed deep API security testing (white-box) across authentication, authorization, and input validation layers.',
+                'Identified and tested vulnerabilities including: Mass assignment, improper input validation (XSS), and authorization weaknesses.',
+                'Designed and executed a structured vulnerability assessment methodology aligned with real-world bug bounty workflows.',
+                'Assisted in security fixes: Input validation, secure schema enforcement, and API rate limiting.',
+                'Contributed to SOC2 readiness by evaluating open-source compliance tools (e.g., CompAI) and defining audit scope/controls.',
+                'Analyzed GCP cloud security posture, defining IAM role review strategy and external attack surface considerations.',
+                'Improved API security posture and contributed to compliance readiness.'
+            ],
+            skills: ['Python', 'Postman', 'Burp Suite', 'GCP', 'OWASP Top 10'],
+            links: [
+                { label: 'Company Website', url: 'https://conversailabs.com' }
+            ]
+        },
+        {
             role: 'Backend Developer',
             company: 'Genxploit Labs',
             type: 'Internship',
-            duration: 'Dec 2025 - Present',
+            duration: 'Dec 2025 - Mar 2026',
             location: 'Amsterdam, Netherlands (Remote)',
             desc: [
                 'Designed and implemented the entire backend infrastructure using Supabase and PostgreSQL.',
