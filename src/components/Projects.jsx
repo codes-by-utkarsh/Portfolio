@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 const ProjectCard = ({ project }) => {
     const [isHovered, setIsHovered] = useState(false);
+    const [isExpanded, setIsExpanded] = useState(false);
 
     return (
         <div
@@ -24,9 +25,43 @@ const ProjectCard = ({ project }) => {
                 {project.subtitle && <span style={styles.subtitle}> - {project.subtitle}</span>}
             </h3>
 
-            <p style={styles.description}>
+            <p style={{
+                ...styles.description,
+                WebkitLineClamp: isExpanded ? 'unset' : '4',
+                marginBottom: project.bullets ? '1rem' : 'auto'
+            }}>
                 {project.description}
             </p>
+
+            {isExpanded && project.bullets && (
+                <div style={styles.expandedContent}>
+                    <span style={{ color: 'var(--text-primary)', fontWeight: '600' }}>Key Responsibilities & Achievements:</span>
+                    <ul style={styles.expandedList}>
+                        {project.bullets.map((b, i) => <li key={i} style={styles.listItem}>{b}</li>)}
+                    </ul>
+                </div>
+            )}
+
+            {isExpanded && project.impact && (
+                <div style={styles.expandedContent}>
+                    <span style={{ color: 'var(--text-primary)', fontWeight: '600' }}>Impact:</span>
+                    <ul style={styles.expandedList}>
+                        {project.impact.map((imp, i) => <li key={i} style={styles.listItem}>{imp}</li>)}
+                    </ul>
+                </div>
+            )}
+
+            {(project.bullets) && (
+                <span
+                    style={{
+                        ...styles.readMoreBtn,
+                        marginBottom: 'auto'
+                    }}
+                    onClick={() => setIsExpanded(!isExpanded)}
+                >
+                    {isExpanded ? 'View Less ↑' : 'Read Details ↓'}
+                </span>
+            )}
 
             <div style={styles.skillsContainer}>
                 {project.skills.map((skill, i) => (
@@ -53,6 +88,30 @@ const ProjectCard = ({ project }) => {
 
 const Projects = () => {
     const projects = [
+        {
+            title: 'Security & Compliance Engineering',
+            subtitle: 'ConversAI Labs',
+            period: 'Feb 2026 - Present',
+            description: 'Worked on securing and preparing a production-grade AI platform for compliance (SOC2-oriented). Focused on backend/API security, vulnerability assessment, and infrastructure-level risk analysis.',
+            bullets: [
+                'Performed deep API security testing (white-box) across authentication, authorization, and input validation layers.',
+                'Identified and managed vulnerabilities including mass assignment, improper input validation (XSS), and authorization flaws.',
+                'Designed and executed a structured vulnerability assessment methodology aligned with real-world bug bounty workflows.',
+                'Assisted in security fixes: Input validation, secure schema enforcement, and API rate limiting.',
+                'Contributed to SOC2 readiness by evaluating open-source compliance tools and defining audit scope/controls.',
+                'Analyzed GCP cloud security posture, defining IAM role review strategy and external attack surface considerations.',
+                'Collaborated with the team to prioritize security fixes based on risk impact.'
+            ],
+            impact: [
+                'Improved API security posture by identifying critical vulnerabilities before production exposure.',
+                'Contributed to compliance readiness (SOC2) by aligning engineering efforts with security controls.',
+                'Established a repeatable security testing workflow for future assessments.'
+            ],
+            skills: ['Python', 'Postman', 'Burp Suite', 'Nmap', 'GCP', 'OWASP Top 10'],
+            type: 'Security Engineering',
+            link: 'https://conversailabs.com',
+            linkText: 'Organization Website'
+        },
         {
             title: 'WatchDog',
             period: 'Jan 2026',
@@ -208,6 +267,32 @@ const styles = {
         textDecoration: 'none',
         width: 'fit-content',
         cursor: 'pointer',
+    },
+    expandedContent: {
+        color: 'var(--text-secondary)',
+        fontSize: '0.9rem',
+        lineHeight: '1.5',
+        marginBottom: '1rem',
+    },
+    expandedList: {
+        paddingLeft: '1.2rem',
+        marginTop: '0.5rem',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '0.4rem',
+    },
+    listItem: {
+        listStyleType: 'disc',
+    },
+    readMoreBtn: {
+        color: '#00ff41',
+        fontSize: '0.85rem',
+        cursor: 'pointer',
+        fontFamily: 'var(--font-mono)',
+        width: 'fit-content',
+        display: 'inline-block',
+        marginTop: '0.5rem',
+        userSelect: 'none',
     }
 };
 
