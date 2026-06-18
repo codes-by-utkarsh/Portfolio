@@ -105,9 +105,9 @@ const Experience = () => {
 
             {/* CTF Rank Highlight */}
             <div style={styles.highlightCard}>
-                <div style={styles.rankBadge}>CTF Ranking</div>
-                <h3 style={styles.teamName}>Ranked #31 at <a href="https://ctftime.org/team/286659">ctftimes.org</a> in India</h3>
-                <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem' }}>with buf!3rBr34CH3r$</p>
+                <div style={styles.rankBadge}>[ CTF RANKING ]</div>
+                <h3 style={styles.teamName}>Ranked #31 at <a href="https://ctftime.org/team/286659" style={{color: 'var(--accent-cyan)'}}>ctftimes.org</a> in India</h3>
+                <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', marginTop: '0.5rem' }}>with buf!3rBr34CH3r$</p>
             </div>
 
             <div style={styles.timeline}>
@@ -117,12 +117,12 @@ const Experience = () => {
                         <div style={styles.content}>
                             <div style={styles.header}>
                                 <h3 style={styles.role}>{exp.role}</h3>
-                                <span style={styles.duration}>{exp.duration}</span>
+                                <span style={styles.duration}>[ {exp.duration} ]</span>
                             </div>
                             <div style={styles.subHeader}>
                                 <span style={styles.company}>{exp.company}</span>
-                                <span style={styles.type}>• {exp.type}</span>
-                                <span style={styles.location}>• {exp.location}</span>
+                                <span style={styles.type}> // {exp.type}</span>
+                                <span style={styles.location}> // {exp.location}</span>
                             </div>
 
                             {/* Links/Documents */}
@@ -130,7 +130,7 @@ const Experience = () => {
                                 <div style={styles.linksContainer}>
                                     {exp.links.map((link, i) => (
                                         <a key={i} href={link.url} target="_blank" rel="noopener noreferrer" style={styles.docLink}>
-                                            📄 {link.label}
+                                            &gt; {link.label}
                                         </a>
                                     ))}
                                 </div>
@@ -139,7 +139,7 @@ const Experience = () => {
                             <ul style={styles.list}>
                                 {exp.desc.map((point, i) => (
                                     <li key={i} style={styles.listItem}>
-                                        <span style={styles.bullet}>›</span> {point}
+                                        <span style={styles.bullet}>&gt;</span> {point}
                                     </li>
                                 ))}
                             </ul>
@@ -160,8 +160,8 @@ const styles = {
     highlightCard: {
         padding: '1.5rem',
         border: '1px solid var(--border-color)', // Green border
-        background: 'linear-gradient(45deg, rgba(0,255,65,0.05) 0%, rgba(0,0,0,0) 100%)',
-        borderRadius: '8px',
+        background: 'rgba(0, 255, 65, 0.05)',
+        borderRadius: '0',
         marginBottom: '3rem',
         display: 'flex',
         flexDirection: 'column',
@@ -169,24 +169,23 @@ const styles = {
         textAlign: 'center',
     },
     rankBadge: {
-        backgroundColor: '#00ff41',
-        color: '#000',
-        fontWeight: 'bold',
+        color: 'var(--accent-green)',
+        fontWeight: 'normal',
         padding: '0.25rem 0.75rem',
-        borderRadius: '100px',
         fontSize: '0.9rem',
         marginBottom: '0.5rem',
         fontFamily: 'var(--font-mono)',
     },
     teamName: {
         fontSize: '1.5rem',
-        fontWeight: '700',
+        fontWeight: 'normal',
         color: 'var(--text-primary)',
+        fontFamily: 'var(--font-main)',
     },
     timeline: {
         position: 'relative',
         paddingLeft: '20px',
-        borderLeft: '1px solid var(--border-color)',
+        borderLeft: '1px dashed var(--border-color)',
     },
     timelineItem: {
         marginBottom: '3rem',
@@ -195,14 +194,13 @@ const styles = {
     },
     marker: {
         position: 'absolute',
-        left: '-25px',
+        left: '-26px',
         top: '5px',
-        width: '11px',
-        height: '11px',
-        backgroundColor: '#00ff41',
-        borderRadius: '50%',
-        border: '2px solid #000',
-        boxShadow: '0 0 10px rgba(0,255,65,0.5)',
+        width: '12px',
+        height: '12px',
+        backgroundColor: 'var(--bg-color)',
+        border: '2px solid var(--accent-green)',
+        boxShadow: '0 0 5px rgba(69, 242, 72, 0.5)',
     },
     content: {
         display: 'flex',
@@ -218,29 +216,29 @@ const styles = {
     },
     role: {
         fontSize: '1.2rem',
-        fontWeight: '600',
+        fontWeight: 'normal',
         color: 'var(--text-primary)',
     },
     duration: {
         fontFamily: 'var(--font-mono)',
         fontSize: '0.85rem',
-        color: '#00ff41',
+        color: 'var(--accent-purple)',
     },
     subHeader: {
         fontSize: '1rem',
         color: 'var(--text-secondary)',
         marginBottom: '0.5rem',
+        fontFamily: 'var(--font-mono)',
     },
     company: {
-        fontWeight: '500',
-        color: 'var(--text-primary)',
+        fontWeight: 'normal',
+        color: 'var(--accent-cyan)',
     },
     type: {
         color: 'var(--text-secondary)',
     },
     location: {
         color: 'var(--text-secondary)',
-        fontStyle: 'italic',
     },
     linksContainer: {
         display: 'flex',
@@ -249,12 +247,12 @@ const styles = {
     },
     docLink: {
         fontSize: '0.9rem',
-        color: '#00ff41', // Cyber green
+        color: 'var(--accent-yellow)', 
         textDecoration: 'none',
-        borderBottom: '1px dotted #00ff41',
         display: 'flex',
         alignItems: 'center',
         gap: '0.3rem',
+        fontFamily: 'var(--font-mono)',
     },
     list: {
         display: 'flex',
@@ -271,8 +269,8 @@ const styles = {
         lineHeight: '1.5',
     },
     bullet: {
-        color: '#00ff41',
-        fontWeight: 'bold',
+        color: 'var(--accent-green)',
+        fontWeight: 'normal',
     },
     tags: {
         display: 'flex',
@@ -282,8 +280,7 @@ const styles = {
     tag: {
         fontSize: '0.8rem',
         padding: '0.2rem 0.6rem',
-        border: '1px solid var(--border-color)',
-        borderRadius: '4px',
+        border: '1px solid var(--border-highlight)',
         color: 'var(--text-secondary)',
         fontFamily: 'var(--font-mono)',
     }

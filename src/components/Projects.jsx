@@ -8,15 +8,15 @@ const ProjectCard = ({ project }) => {
         <div
             style={{
                 ...styles.card,
-                transform: isHovered ? 'translateY(-10px)' : 'none',
-                borderColor: isHovered ? '#00ff41' : 'var(--border-color)',
-                boxShadow: isHovered ? '0 10px 30px -10px rgba(0, 255, 65, 0.15)' : 'none'
+                transform: isHovered ? 'translateY(-5px)' : 'none',
+                borderColor: isHovered ? 'var(--accent-yellow)' : 'var(--border-color)',
+                boxShadow: isHovered ? '0 0 15px rgba(242, 227, 69, 0.15)' : 'none'
             }}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
             <div style={styles.cardHeader}>
-                <div style={styles.typeBadge}>{project.type}</div>
+                <div style={styles.typeBadge}>[ {project.type} ]</div>
                 <span style={styles.period}>{project.period}</span>
             </div>
 
@@ -35,7 +35,7 @@ const ProjectCard = ({ project }) => {
 
             {isExpanded && project.bullets && (
                 <div style={styles.expandedContent}>
-                    <span style={{ color: 'var(--text-primary)', fontWeight: '600' }}>Key Responsibilities & Achievements:</span>
+                    <span style={{ color: 'var(--text-primary)', fontWeight: 'normal' }}>// Responsibilities:</span>
                     <ul style={styles.expandedList}>
                         {project.bullets.map((b, i) => <li key={i} style={styles.listItem}>{b}</li>)}
                     </ul>
@@ -44,7 +44,7 @@ const ProjectCard = ({ project }) => {
 
             {isExpanded && project.impact && (
                 <div style={styles.expandedContent}>
-                    <span style={{ color: 'var(--text-primary)', fontWeight: '600' }}>Impact:</span>
+                    <span style={{ color: 'var(--text-primary)', fontWeight: 'normal' }}>// Impact:</span>
                     <ul style={styles.expandedList}>
                         {project.impact.map((imp, i) => <li key={i} style={styles.listItem}>{imp}</li>)}
                     </ul>
@@ -59,7 +59,7 @@ const ProjectCard = ({ project }) => {
                     }}
                     onClick={() => setIsExpanded(!isExpanded)}
                 >
-                    {isExpanded ? 'View Less ↑' : 'Read Details ↓'}
+                    {isExpanded ? 'Collapse ↑' : 'Expand ↓'}
                 </span>
             )}
 
@@ -73,12 +73,12 @@ const ProjectCard = ({ project }) => {
                 {project.links ? (
                     project.links.map((link, i) => (
                         <a key={i} href={link.url} className="project-link" style={styles.link} target="_blank" rel="noopener noreferrer">
-                            {link.text}
+                            &gt; {link.text}
                         </a>
                     ))
                 ) : (
                     <a href={project.link} className="project-link" style={styles.link} target="_blank" rel="noopener noreferrer">
-                        {project.linkText}
+                        &gt; {project.linkText}
                     </a>
                 )}
             </div>
@@ -164,11 +164,11 @@ const styles = {
     card: {
         backgroundColor: 'var(--surface-color)',
         border: '1px solid var(--border-color)',
-        borderRadius: '12px',
+        borderRadius: '0',
         padding: '2rem',
         display: 'flex',
         flexDirection: 'column',
-        transition: 'transform 0.2s, border-color 0.2s, box-shadow 0.2s',
+        transition: 'all 0.2s ease',
         cursor: 'default',
         minHeight: '400px', // Uniform height
     },
@@ -179,14 +179,12 @@ const styles = {
         marginBottom: '1.5rem',
     },
     typeBadge: {
-        fontSize: '0.75rem',
+        fontSize: '0.85rem',
         textTransform: 'uppercase',
         letterSpacing: '0.05em',
-        color: '#00ff41',
-        border: '1px solid #00ff41',
-        padding: '0.25rem 0.75rem',
-        borderRadius: '100px',
-        fontWeight: '600',
+        color: 'var(--accent-yellow)',
+        fontFamily: 'var(--font-mono)',
+        fontWeight: 'normal',
     },
     period: {
         fontSize: '0.85rem',
@@ -198,6 +196,8 @@ const styles = {
         marginBottom: '1rem',
         color: 'var(--text-primary)',
         lineHeight: '1.3',
+        fontWeight: 'normal',
+        fontFamily: 'var(--font-main)',
     },
     subtitle: {
         fontSize: '1rem',
@@ -223,26 +223,29 @@ const styles = {
     },
     skillTag: {
         fontSize: '0.75rem',
-        backgroundColor: 'rgba(255, 255, 255, 0.05)',
+        backgroundColor: 'transparent',
+        border: '1px solid var(--border-highlight)',
         color: 'var(--text-secondary)',
-        padding: '0.3rem 0.6rem',
-        borderRadius: '4px',
+        padding: '0.2rem 0.5rem',
+        fontFamily: 'var(--font-mono)',
     },
     linksContainer: {
         display: 'flex',
-        justifyContent: 'space-between',
+        flexDirection: 'column',
+        gap: '0.5rem',
         width: '100%',
         marginTop: 'auto',
     },
     link: {
         display: 'inline-flex',
         alignItems: 'center',
-        color: '#00ff41',
-        fontWeight: '600',
+        color: 'var(--accent-cyan)',
+        fontWeight: 'normal',
         fontSize: '0.95rem',
         textDecoration: 'none',
         width: 'fit-content',
         cursor: 'pointer',
+        fontFamily: 'var(--font-mono)',
     },
     expandedContent: {
         color: 'var(--text-secondary)',
@@ -258,10 +261,10 @@ const styles = {
         gap: '0.4rem',
     },
     listItem: {
-        listStyleType: 'disc',
+        listStyleType: 'square',
     },
     readMoreBtn: {
-        color: '#00ff41',
+        color: 'var(--accent-yellow)',
         fontSize: '0.85rem',
         cursor: 'pointer',
         fontFamily: 'var(--font-mono)',

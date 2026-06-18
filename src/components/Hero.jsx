@@ -1,16 +1,13 @@
-
 import React, { useState } from 'react';
 import profileImg from '../assets/utkarsh.webp';
 
 const SocialLink = ({ href, customIcon, alt, isDownload, brandColor }) => {
     const [isHovered, setIsHovered] = useState(false);
-    const activeColor = brandColor || '#00ff41'; // Default theme green
+    const activeColor = brandColor || 'var(--accent-green)'; // Default theme green
 
-    // Extract RGB from hex for background opacity
-    const hex = activeColor.replace('#', '');
-    const r = parseInt(hex.substring(0, 2), 16);
-    const g = parseInt(hex.substring(2, 4), 16);
-    const b = parseInt(hex.substring(4, 6), 16);
+    // Extract RGB from hex for background opacity (fallback if it's a CSS variable)
+    const isVar = activeColor.startsWith('var');
+    const bgOpacity = isHovered ? (isVar ? 'rgba(0, 255, 65, 0.1)' : `${activeColor}22`) : 'transparent';
 
     return (
         <a
@@ -24,12 +21,12 @@ const SocialLink = ({ href, customIcon, alt, isDownload, brandColor }) => {
                 justifyContent: 'center',
                 width: '45px',
                 height: '45px',
-                borderRadius: '50%',
-                backgroundColor: isHovered ? `rgba(${r}, ${g}, ${b}, 0.1)` : 'var(--surface-color)',
+                borderRadius: '0', // Cyberpunk sharp edge
+                backgroundColor: bgOpacity,
                 border: `1px solid ${isHovered ? activeColor : 'var(--border-color)'} `,
                 transition: 'all 0.3s ease',
                 transform: isHovered ? 'translateY(-3px)' : 'none',
-                boxShadow: isHovered ? `0 5px 15px rgba(${r}, ${g}, ${b}, 0.2)` : 'none',
+                boxShadow: isHovered ? `0 0 10px ${activeColor}44` : 'none',
                 textDecoration: 'none',
                 color: isHovered ? activeColor : 'var(--text-secondary)',
             }}
@@ -97,31 +94,46 @@ const Hero = () => {
 
     return (
         <section className="container hero-section" style={styles.heroSection}>
-            <div className="hero-content" style={styles.content}>
-                <div style={styles.badge}>Security Researcher & Developer</div>
-                <h1 className="hero-title" style={styles.title}>
-                    Hi, I'm <span style={{ color: '#00ff41' }}>Utkarsh Srivastava</span>
-                </h1>
-                <h2 style={styles.subtitle}>
-                    a.k.a <span style={{ fontFamily: 'var(--font-mono)', color: '#00ff41' }}>drizzlehx</span>
-                </h2>
-                <p style={styles.description}>
-                    Offense-driven security. Defense-ready solutions.
-                </p>
-
-                <div style={styles.socials}>
-                    {socialLinks.map((link, index) => (
-                        <SocialLink key={index} {...link} />
-                    ))}
-                </div>
-
-                <div className="hero-actions" style={styles.actions}>
-                    <a href="#services" className="btn btn-primary">View Services</a>
-                    <a href="#contact" className="btn">Contact Me</a>
-                </div>
+            
+            {/* The Space Image Banner */}
+            <div style={styles.bannerContainer}>
+               <img src="/red-planet.png" alt="Planet" style={styles.bannerImage} />
+               <div style={styles.bannerDecorators}>
+                   <div></div>
+                   <div style={styles.bannerText}>[ PLANETARY_SYS_1.3.4  .  OBSERVATION ]</div>
+               </div>
             </div>
-            <div style={styles.imageWrapper}>
-                <img src={profileImg} alt="Utkarsh Srivastava" className="hero-image" style={styles.image} />
+
+            <div style={styles.contentWrapper}>
+                <div className="hero-content" style={styles.content}>
+                    <div style={styles.badge}>&gt; ROOT_ACCESS_GRANTED</div>
+                    <h1 className="hero-title" style={styles.title}>
+                        <span style={{ color: 'var(--text-secondary)' }}>Hello, I am</span> <br/>
+                        <span style={{ color: 'var(--accent-green)' }}>Utkarsh Srivastava</span><span className="cursor-blink" style={{ color: 'var(--accent-green)' }}>_</span>
+                    </h1>
+                    <h2 style={styles.subtitle}>
+                        // <span style={{ color: 'var(--accent-cyan)' }}>drizzlehx</span>
+                    </h2>
+                    <p style={styles.description}>
+                        <span style={{color: 'var(--accent-yellow)'}}>Offense-driven security.</span> Defense-ready solutions.<br/>
+                        Executing protocols for robust architecture and deep packet analysis.
+                    </p>
+
+                    <div style={styles.socials}>
+                        {socialLinks.map((link, index) => (
+                            <SocialLink key={index} {...link} />
+                        ))}
+                    </div>
+
+                    <div className="hero-actions" style={styles.actions}>
+                        <a href="#services" className="btn btn-primary">INITIALIZE_SERVICES</a>
+                        <a href="#contact" className="btn">PING_ME</a>
+                    </div>
+                </div>
+
+                <div style={styles.imageWrapper}>
+                    <img src={profileImg} alt="Utkarsh Srivastava" className="hero-image" style={styles.image} />
+                </div>
             </div>
         </section>
     );
@@ -129,51 +141,93 @@ const Hero = () => {
 
 const styles = {
     heroSection: {
-        minHeight: '100vh',
+        minHeight: '80vh',
         display: 'flex',
+        flexDirection: 'column',
         alignItems: 'center',
+        paddingTop: '120px', // Below the large header
+        gap: '2rem',
+    },
+    bannerContainer: {
+        width: '100%',
+        position: 'relative',
+        border: '1px solid var(--border-color)',
+        padding: '2px',
+        marginBottom: '2rem',
+        backgroundColor: '#000',
+    },
+    bannerImage: {
+        width: '100%',
+        height: '250px',
+        objectFit: 'cover',
+        opacity: 0.8,
+        filter: 'contrast(1.2) saturate(1.2)',
+    },
+    bannerDecorators: {
+        position: 'absolute',
+        bottom: '10px',
+        right: '15px',
+        display: 'flex',
         justifyContent: 'space-between',
-        paddingTop: '80px',
-        gap: '4rem',
+        width: '100%',
+    },
+    bannerText: {
+        fontFamily: 'var(--font-mono)',
+        color: 'var(--text-secondary)',
+        fontSize: '0.8rem',
+        letterSpacing: '0.1em',
+        backgroundColor: 'rgba(0,0,0,0.5)',
+        padding: '2px 5px',
+    },
+    contentWrapper: {
+        display: 'flex',
+        width: '100%',
+        justifyContent: 'space-between',
+        alignItems: 'center',
         flexWrap: 'wrap',
+        gap: '4rem',
     },
     content: {
         flex: 1,
         minWidth: '300px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-start',
+        borderLeft: '1px solid var(--border-color)',
+        paddingLeft: '2rem',
     },
     badge: {
         display: 'inline-block',
-        padding: '0.25rem 0.75rem',
-        backgroundColor: 'var(--surface-hover)',
-        borderRadius: '100px',
-        fontSize: '0.85rem',
+        fontSize: '0.9rem',
         marginBottom: '1.5rem',
         fontFamily: 'var(--font-mono)',
-        color: 'var(--text-secondary)',
+        color: 'var(--accent-red)',
     },
     title: {
         fontSize: '3.5rem',
-        fontWeight: '800',
-        lineHeight: '1.1',
+        fontWeight: 'normal',
+        lineHeight: '1.2',
         marginBottom: '1rem',
-        color: 'var(--text-secondary)',
+        textTransform: 'uppercase',
     },
     subtitle: {
         fontSize: '1.5rem',
         marginBottom: '1.5rem',
-        color: 'var(--text-primary)',
-        fontWeight: '400',
+        color: 'var(--text-secondary)',
+        fontWeight: 'normal',
     },
     description: {
-        maxWidth: '500px',
+        maxWidth: '600px',
         marginBottom: '2rem',
-        color: 'var(--text-secondary)',
+        color: 'var(--text-primary)',
         fontSize: '1.1rem',
+        lineHeight: '1.8',
     },
     socials: {
         display: 'flex',
         gap: '1rem',
         marginBottom: '2.5rem',
+        flexWrap: 'wrap',
     },
     actions: {
         display: 'flex',
@@ -189,12 +243,13 @@ const styles = {
     image: {
         width: '300px',
         height: '300px',
-        borderRadius: '50%',
+        borderRadius: '0', // Cyberpunk sharp edges
         objectFit: 'cover',
         transition: 'transform 0.3s ease',
         position: 'relative',
         zIndex: 2,
-        border: '2px solid var(--border-color)',
+        border: '1px solid var(--border-color)',
+        filter: 'grayscale(30%) contrast(120%)', // Give it a slightly gritty look
     }
 };
 

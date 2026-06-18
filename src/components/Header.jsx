@@ -2,6 +2,7 @@ import React from 'react';
 
 const Header = () => {
   const [isOpen, setIsOpen] = React.useState(false);
+  const [hoveredIndex, setHoveredIndex] = React.useState(null);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -15,27 +16,49 @@ const Header = () => {
     }
   };
 
+  const navItems = [
+    { name: 'Experience', id: 'experience', color: 'var(--accent-green)' },
+    { name: 'Skills', id: 'skills', color: 'var(--accent-cyan)' },
+    { name: 'Projects', id: 'projects', color: 'var(--accent-yellow)' },
+    { name: 'Certifications', id: 'certifications', color: 'var(--accent-purple)' },
+    { name: 'Awards', id: 'achievements', color: 'var(--accent-red)' },
+    { name: 'Education', id: 'education', color: 'var(--accent-blue)' },
+    { name: 'Services', id: 'services', color: 'var(--accent-grey)' },
+    { name: 'Contact Me', id: 'contact', color: 'var(--accent-orange)' },
+  ];
+
   return (
     <header style={styles.header}>
       <div className="container" style={styles.navContainer}>
-        <div style={styles.logo}>Utkarsh Srivastava</div>
+        {/* We can place the top info here similar to shaivarth.com */}
+        <div style={styles.topInfo}>
+           <div style={styles.logo}>UTKARSH SRIVASTAVA [DRIZZLEHX] | SECURITY RESEARCHER & DEVELOPER</div>
+           <div style={styles.status}>STATUS: <span style={{color: 'var(--accent-green)'}}>ONLINE</span></div>
+        </div>
 
-        <div className="hamburger" onClick={toggleMenu}>
+        <div className="hamburger" onClick={toggleMenu} style={{position: 'absolute', right: '2rem', top: '1.5rem'}}>
           <span className={isOpen ? "bar active" : "bar"}></span>
           <span className={isOpen ? "bar active" : "bar"}></span>
           <span className={isOpen ? "bar active" : "bar"}></span>
         </div>
 
-        <nav className={`nav-menu ${isOpen ? 'active' : ''}`}>
+        <nav className={`nav-menu ${isOpen ? 'active' : ''}`} style={styles.navWrapper}>
           <ul style={{ ...styles.navList, flexDirection: isOpen ? 'column' : 'row' }}>
-            <li style={styles.navItem} onClick={() => scrollToSection('experience')}>Experience</li>
-            <li style={styles.navItem} onClick={() => scrollToSection('skills')}>Skills</li>
-            <li style={styles.navItem} onClick={() => scrollToSection('projects')}>Projects</li>
-            <li style={styles.navItem} onClick={() => scrollToSection('certifications')}>Certifications</li>
-            <li style={styles.navItem} onClick={() => scrollToSection('achievements')}>Awards</li>
-            <li style={styles.navItem} onClick={() => scrollToSection('education')}>Education</li>
-            <li style={styles.navItem} onClick={() => scrollToSection('services')}>Services</li>
-            <li style={styles.navItem} onClick={() => scrollToSection('contact')}>Contact</li>
+            {navItems.map((item, index) => (
+               <li 
+                 key={index}
+                 style={{
+                   ...styles.navItem,
+                   borderColor: hoveredIndex === index ? item.color : 'var(--border-color)',
+                   color: hoveredIndex === index ? item.color : 'var(--text-secondary)',
+                 }}
+                 onMouseEnter={() => setHoveredIndex(index)}
+                 onMouseLeave={() => setHoveredIndex(null)}
+                 onClick={() => scrollToSection(item.id)}
+               >
+                 {item.name.toUpperCase()}
+               </li>
+            ))}
           </ul>
         </nav>
       </div>
@@ -45,41 +68,56 @@ const Header = () => {
 
 const styles = {
   header: {
-    padding: '1.5rem 0',
+    padding: '0',
     position: 'fixed',
     top: 0,
     left: 0,
     right: 0,
-    backgroundColor: 'rgba(5, 5, 5, 0.9)',
-    backdropFilter: 'blur(10px)',
+    backgroundColor: 'rgba(11, 12, 16, 0.95)',
+    backdropFilter: 'blur(5px)',
     zIndex: 1000,
     borderBottom: '1px solid var(--border-color)',
   },
   navContainer: {
     display: 'flex',
+    flexDirection: 'column',
+  },
+  topInfo: {
+    display: 'flex',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    padding: '1rem 0',
+    borderBottom: '1px solid var(--border-color)',
+    fontSize: '0.85rem',
+    color: 'var(--accent-yellow)',
+    fontFamily: 'var(--font-mono)',
   },
   logo: {
-    fontFamily: 'var(--font-mono)',
-    fontWeight: '700',
-    fontSize: '1.2rem',
-    letterSpacing: '-0.05em',
-    zIndex: 1001,
+    fontWeight: 'normal',
+    letterSpacing: '0.05em',
+  },
+  status: {
+    color: 'var(--text-secondary)',
+  },
+  navWrapper: {
+    width: '100%',
   },
   navList: {
     display: 'flex',
-    gap: '2rem',
-    alignItems: 'center',
+    alignItems: 'stretch',
+    width: '100%',
   },
   navItem: {
+    flex: 1,
+    textAlign: 'center',
     cursor: 'pointer',
     fontSize: '0.9rem',
-    fontWeight: '500',
-    transition: 'color 0.3s ease',
-    ':hover': {
-      color: '#fff',
-    }
+    fontWeight: 'normal',
+    padding: '0.75rem 0',
+    borderRight: '1px solid var(--border-color)',
+    borderBottom: '2px solid transparent',
+    transition: 'all 0.2s ease',
+    textTransform: 'uppercase',
+    letterSpacing: '0.05em',
   }
 };
 
